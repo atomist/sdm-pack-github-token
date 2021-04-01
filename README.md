@@ -4,6 +4,22 @@ Extension pack to support new style
 [GitHub tokens](https://github.blog/changelog/2021-03-31-authentication-token-format-updates-are-generally-available/)
 needed as of March, 31st 2021.
 
+## Usage
+
+Please install this npm package into your SDM:
+
+```shell
+$ npm install @atomist/sdm-pack-github-token 
+```
+
+and then enable the extension pack in your SDM configuration:
+
+````typescript
+extensionPacks: [
+    newGitHubTokenSupport(),
+],
+````
+
 ## Contributing
 
 Contributions to this project from community members are encouraged and
