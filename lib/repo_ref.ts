@@ -24,6 +24,7 @@ import {
 	isTokenCredentials,
 	ProjectOperationCredentials,
 } from "@atomist/automation-client/lib/operations/common/ProjectOperationCredentials";
+import { GitShaRegExp } from "@atomist/automation-client/src/lib/operations/common/params/validationPatterns";
 
 export class NewTokenGitHubRepoRef extends GitHubRepoRef {
 	constructor(
@@ -36,6 +37,27 @@ export class NewTokenGitHubRepoRef extends GitHubRepoRef {
 		rawRemoteBase?: string,
 	) {
 		super(owner, repo, sha, rawApiBase, path, branch, rawRemoteBase);
+	}
+
+	public static from(params: {
+		owner: string;
+		repo: string;
+		sha?: string;
+		rawApiBase?: string;
+		path?: string;
+		branch?: string;
+	}): GitHubRepoRef {
+		if (params.sha && !params.sha.match(GitShaRegExp.pattern)) {
+			throw new Error("You provided an invalid SHA: " + params.sha);
+		}
+		return new NewTokenGitHubRepoRef(
+			params.owner,
+			params.repo,
+			params.sha,
+			params.rawApiBase,
+			params.path,
+			params.branch,
+		);
 	}
 
 	public cloneUrl(creds: ProjectOperationCredentials): string {
