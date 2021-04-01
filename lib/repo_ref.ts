@@ -24,7 +24,7 @@ import {
 	isTokenCredentials,
 	ProjectOperationCredentials,
 } from "@atomist/automation-client/lib/operations/common/ProjectOperationCredentials";
-import { GitShaRegExp } from "@atomist/automation-client/src/lib/operations/common/params/validationPatterns";
+import { GitShaRegExp } from "@atomist/automation-client/lib/operations/common/params/validationPatterns";
 
 export class NewTokenGitHubRepoRef extends GitHubRepoRef {
 	constructor(
